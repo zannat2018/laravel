@@ -2,9 +2,10 @@
 @section('content')
 @include('fees.styleSheet.css-payment')
 <div class="panel panel-default">
-	<div class="panel-heading">
+
+<div class="panel-heading">
 		<div class="col-md-3">
-			<form action="{{route('showStudentPayment')}}" class="search-payment" method="GET">
+			<form action="{{ route('showStudentPayment')}}" class="search-payment" method="GET">
 				<input class="form-control" name="student_id" placeholder="Student ID" type="text">
 			</form>
 			
@@ -32,6 +33,7 @@
 				
 			</caption>
 				<thead>
+
 					<tr>
 						<th>Program</th>
 						<th>Level</th>
@@ -43,8 +45,9 @@
 					</tr>
 				</thead>
 				<tr>
+
 					<td>
-						<select id="academic_id" name="AcademicID">
+						<select name="academic_id" id="AcademicID">
 							<option value="">-------</option>}
 						</select>
 					</td>
@@ -76,12 +79,14 @@
 						<input type="text" name="balance" id="Balance">
 					</td>
 				</tr>
+
 				<thead>
 					<tr>
 						<th colspan="2">Remark</th>
 						<th colspan="5">Description</th>
 					</tr>
 				</thead>
+
 				<tbody>
 					<tr>
 						<td colspan="2" 
@@ -94,6 +99,7 @@
 						</td>
 					</tr>
 				</tbody>
+
 			</table>
 		
 	</div>
@@ -103,4 +109,4 @@
 	
 </div>
 
-@stop
+@endsection

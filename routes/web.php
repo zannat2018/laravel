@@ -27,11 +27,9 @@ Route::group(['middleware'=>['authen']],function(){
 });
 Route::group(['middleware'=>['authen','roles'], 'roles'=>['admin']],function(){
 
-     Route::get('/manage/course',['as' =>'manageCourse', 'uses'=>'CourseController@getManageCourse']);
-
-	Route::post('/manage/course/insert',['as'=> 'postInsertAcademic', 'uses' => 'CourseController@postInsertAcademic']);
-
-	Route::post('/manage/course/Insert-program',['as'=>'postInsertProgram','uses'=>'CourseController@postInsertProgram']);
+        Route::get('/manage/course',['as' =>'manageCourse', 'uses'=>'CourseController@getManageCourse']);
+	    Route::post('/manage/course/insert',['as'=> 'postInsertAcademic', 'uses' => 'CourseController@postInsertAcademic']);
+	    Route::post('/manage/course/Insert-program',['as'=>'postInsertProgram','uses'=>'CourseController@postInsertProgram']);
 		Route::post('/manage/course/Insert-level',['as'=>'postInsertLevel','uses'=>'CourseController@postInsertLevel']);
 		Route::get('/manage/course/showLevel',['as'=>'showLevel','uses'=>'CourseController@showLevel']);
 		Route::post('/manage/course/shift',['as'=>'createShift','uses'=>"CourseController@createShift"]);
@@ -49,6 +47,14 @@ Route::group(['middleware'=>['authen','roles'], 'roles'=>['admin']],function(){
 		//------------------fee Controller--------
 		Route::get('/student/show/payment',['as'=>'getPayment','uses'=>'FeeController@getPayment']);
 		Route::get('/student/payment',['as'=>'showStudentPayment','uses'=>'FeeController@showStudentPayment']);
+		Route::get('/student/go/to/payment/{student_id}',['as'=>'goPayment','uses'=>'FeeController@goPayment']);
+		Route::post('/student/payment/save',['as'=>'savePayment','uses'=>'FeeController@savePayment']);
+		Route::post('/fee/create',['as'=>'createFee','uses'=>'FeeController@createFee']);
+
+		Route::get('/fee/student/pay',['as'=>'pay','uses'=>'FeeController@pay']);
+		Route::post('/fee/student/exstray/pay',['as'=>'exstraPay','uses'=>'FeeController@exstraPay']);
+		Route::get('/fee/student/print/invoice/{receiptId}',['as'=>'printInvoice','uses'=>'FeeController@printInvoice']);
+		
 });
 
 

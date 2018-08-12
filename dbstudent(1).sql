@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2018 at 12:20 PM
+-- Generation Time: Aug 10, 2018 at 08:09 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -40,9 +40,7 @@ CREATE TABLE `academics` (
 
 INSERT INTO `academics` (`academic_id`, `academic`, `description`) VALUES
 (1, '2017-2018', NULL),
-(2, '2017-2019', NULL),
-(3, '2015-2016', NULL),
-(4, '2015-2016', NULL);
+(5, '2016-2017', NULL);
 
 -- --------------------------------------------------------
 
@@ -60,9 +58,8 @@ CREATE TABLE `batches` (
 --
 
 INSERT INTO `batches` (`batch_id`, `batch`) VALUES
-(1, '1'),
-(2, '2'),
-(3, '3');
+(4, '1'),
+(5, '2');
 
 -- --------------------------------------------------------
 
@@ -88,14 +85,20 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`class_id`, `academic_id`, `level_id`, `shift_id`, `time_id`, `group_id`, `batch_id`, `start_date`, `end_date`, `active`) VALUES
-(1, 2, 1, 1, 6, 1, 1, '2018-05-09', '2019-04-11', 1),
-(2, 1, 3, 1, 7, 1, 1, '2019-05-15', '2019-05-15', 1),
-(3, 2, 1, 1, 6, 1, 2, '2017-05-10', '2017-05-10', 1),
-(4, 1, 3, 1, 6, 1, 1, '2018-06-12', '2018-06-14', 1),
-(5, 2, 1, 1, 6, 1, 1, '2017-05-02', '2017-06-07', 1),
-(6, 1, 3, 2, 7, 1, 1, '2018-05-15', '2018-05-16', 1),
-(7, 2, 3, 1, 6, 1, 1, '2018-05-14', '2017-06-07', 1),
-(8, 3, 1, 1, 6, 1, 1, '2015-06-10', '2016-07-14', 1);
+(14, 1, 6, 3, 11, 2, 4, '2017-06-14', '2018-07-11', 1),
+(15, 1, 7, 4, 12, 3, 5, '2017-06-01', '2018-06-01', 1),
+(16, 1, 9, 3, 11, 2, 4, '2016-04-20', '2017-05-17', 1),
+(17, 1, 7, 4, 12, 3, 5, '2017-07-06', '2018-07-11', 1),
+(18, 1, 6, 4, 12, 2, 4, '2017-05-11', '2018-05-17', 1),
+(19, 1, 10, 3, 11, 2, 4, '2017-04-12', '2018-05-15', 1),
+(20, 1, 8, 3, 11, 2, 4, '2017-05-10', '2018-06-13', 1),
+(21, 5, 6, 3, 11, 2, 4, '2016-06-11', '2017-05-09', 1),
+(22, 5, 7, 3, 11, 2, 4, '2016-05-17', '2017-05-09', 1),
+(23, 5, 8, 3, 11, 2, 4, '2016-01-03', '2017-01-09', 1),
+(24, 5, 10, 3, 11, 2, 4, '2016-02-09', '2017-06-14', 1),
+(25, 5, 9, 3, 11, 2, 4, '2016-06-15', '2017-06-14', 1),
+(26, 1, 10, 3, 11, 2, 4, '2017-06-21', '2018-06-12', 1),
+(27, 5, 8, 3, 11, 2, 4, '2016-05-18', '2018-06-14', 1);
 
 -- --------------------------------------------------------
 
@@ -105,12 +108,33 @@ INSERT INTO `classes` (`class_id`, `academic_id`, `level_id`, `shift_id`, `time_
 
 CREATE TABLE `fees` (
   `fee_id` int(10) UNSIGNED NOT NULL,
-  `academic_id` int(10) UNSIGNED NOT NULL,
+  `academic_id` int(10) UNSIGNED ZEROFILL NOT NULL,
   `level_id` int(10) UNSIGNED NOT NULL,
   `fee_type_id` int(10) UNSIGNED NOT NULL,
-  `fee_heading` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `amount` double(8,2) NOT NULL
+  `fee_heading` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fees`
+--
+
+INSERT INTO `fees` (`fee_id`, `academic_id`, `level_id`, `fee_type_id`, `fee_heading`, `amount`) VALUES
+(2, 0000000001, 6, 2, 'Fees', 250),
+(3, 0000000005, 6, 2, 'Fees', 250),
+(4, 0000000005, 6, 2, 'Fees', 250),
+(5, 0000000005, 6, 2, 'Fees', 250),
+(6, 0000000005, 6, 2, 'Fees', 250),
+(7, 0000000005, 6, 2, 'Fees', 200),
+(8, 0000000005, 6, 2, 'Fees', 200),
+(9, 0000000005, 6, 2, 'Fees', 100),
+(10, 0000000005, 6, 2, 'Fees', 250),
+(11, 0000000005, 6, 2, 'Fees', 260),
+(12, 0000000005, 6, 2, 'Fees', 250),
+(13, 0000000005, 6, 2, 'Fees', 250),
+(14, 0000000005, 6, 2, 'Fees', 280),
+(15, 0000000005, 6, 2, 'Fees', 200),
+(16, 0000000005, 6, 2, 'Fees', 250);
 
 -- --------------------------------------------------------
 
@@ -122,6 +146,13 @@ CREATE TABLE `feetypes` (
   `fee_type_id` int(10) UNSIGNED NOT NULL,
   `fee_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `feetypes`
+--
+
+INSERT INTO `feetypes` (`fee_type_id`, `fee_type`) VALUES
+(2, 'School fee');
 
 -- --------------------------------------------------------
 
@@ -139,7 +170,8 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`group_id`, `groups`) VALUES
-(1, '1');
+(2, '1'),
+(3, '2');
 
 -- --------------------------------------------------------
 
@@ -159,9 +191,12 @@ CREATE TABLE `levels` (
 --
 
 INSERT INTO `levels` (`level_id`, `level`, `description`, `program_id`) VALUES
-(1, ' I', 'test', 1),
-(2, ' II', 'test', 2),
-(3, 'III', 'test 3', 3);
+(6, 'I', 'This is MS Word', 5),
+(7, 'II', 'This is MS Word', 5),
+(8, 'I', 'This is ms Excel', 7),
+(9, 'I', 'This is ms Access', 8),
+(10, 'II', 'This is ms Excel', 7),
+(11, 'II', 'This is ms Access', 8);
 
 -- --------------------------------------------------------
 
@@ -229,21 +264,38 @@ CREATE TABLE `programs` (
 --
 
 INSERT INTO `programs` (`program_id`, `program`, `description`) VALUES
-(1, 'Microsoft Word', 'This is microsoft word'),
-(2, 'Microsoft Excel', 'This is microsoft excel'),
-(3, 'Ms-Access', NULL);
+(5, 'MS-WORD', 'This is Ms Word'),
+(6, 'MS-WORD', 'This is MS Word'),
+(7, 'MS-EXCEL', 'This is ms Excel'),
+(8, 'MS-ACCESS', 'This is ms Access');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receiptdetail`
+-- Table structure for table `receiptdetails`
 --
 
-CREATE TABLE `receiptdetail` (
+CREATE TABLE `receiptdetails` (
   `receipt_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `transact_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `receiptdetails`
+--
+
+INSERT INTO `receiptdetails` (`receipt_id`, `student_id`, `transact_id`) VALUES
+(1, 15, 2),
+(2, 15, 3),
+(3, 28, 4),
+(4, 28, 5),
+(5, 15, 6),
+(6, 18, 7),
+(7, 18, 8),
+(8, 34, 9),
+(9, 15, 10),
+(10, 36, 11);
 
 -- --------------------------------------------------------
 
@@ -254,6 +306,22 @@ CREATE TABLE `receiptdetail` (
 CREATE TABLE `receipts` (
   `receipt_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `receipts`
+--
+
+INSERT INTO `receipts` (`receipt_id`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10);
 
 -- --------------------------------------------------------
 
@@ -294,8 +362,8 @@ CREATE TABLE `shifts` (
 --
 
 INSERT INTO `shifts` (`shift_id`, `shift`) VALUES
-(1, 'Morning'),
-(2, 'Evening');
+(3, 'Morning'),
+(4, 'Evening');
 
 -- --------------------------------------------------------
 
@@ -314,9 +382,28 @@ CREATE TABLE `statuses` (
 --
 
 INSERT INTO `statuses` (`status_id`, `student_id`, `class_id`) VALUES
-(1, 1, 1),
-(2, 2, NULL),
-(3, 3, NULL);
+(15, 15, 14),
+(16, 16, 20),
+(17, 17, 20),
+(18, 18, 21),
+(19, 19, 16),
+(20, 20, 16),
+(21, 21, 23),
+(22, 22, 24),
+(23, 23, 24),
+(24, 24, 14),
+(25, 25, 23),
+(26, 26, 25),
+(27, 27, 25),
+(28, 28, 21),
+(29, 29, 14),
+(30, 30, 21),
+(31, 31, 21),
+(32, 32, 25),
+(33, 33, 25),
+(34, 34, 21),
+(35, 35, 20),
+(36, 36, 21);
 
 -- --------------------------------------------------------
 
@@ -329,8 +416,19 @@ CREATE TABLE `studentfees` (
   `fee_id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
   `level_id` int(10) UNSIGNED NOT NULL,
-  `amount` double(8,2) NOT NULL
+  `amount` float NOT NULL,
+  `discount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `studentfees`
+--
+
+INSERT INTO `studentfees` (`s_fee_id`, `fee_id`, `student_id`, `level_id`, `amount`, `discount`) VALUES
+(29, 14, 18, 6, 250, 10),
+(30, 14, 34, 6, 200, 28),
+(31, 14, 15, 6, 200, 28),
+(32, 14, 36, 6, 100, 64);
 
 -- --------------------------------------------------------
 
@@ -366,9 +464,28 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `first_name`, `last_name`, `sex`, `dob`, `email`, `rac`, `status`, `nationality`, `national_card`, `passport`, `phone`, `village`, `commune`, `district`, `province`, `current_address`, `dateregistered`, `user_id`, `photo`) VALUES
-(1, 'Trisna', 'Khatun', 1, '2017-02-21', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-07-25', 1, NULL),
-(2, 'sdf', 'sfdsf', 0, '2015-02-02', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-07-25', 1, NULL),
-(3, 'fdgdgdf', 'dfgf', 1, '2004-05-12', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2008-01-01', 1, '');
+(15, 'Zannatun', 'Nayem', 1, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, '56315.2018-08-08.1533721980.jpg'),
+(16, 'asdf', 'sadfd', 0, '2012-08-08', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, '49612.2018-08-08.1533722929.jpg'),
+(17, 'Rahim', 'Ahamed', 0, '2018-08-22', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, '50927.2018-08-08.1533727132.jpg'),
+(18, 'karim', 'Ahamed', 0, '2018-08-15', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, ''),
+(19, 'Asha', 'Khatun', 1, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, ''),
+(20, 'Asha', 'Khatun', 1, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, ''),
+(21, 'sfgdg', 'sdfsg', 0, '2018-08-15', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, ''),
+(22, 'desdfsf', 'sdsf', 1, '2018-08-07', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, ''),
+(23, 'desdfsf', 'sdsf', 1, '2018-08-07', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-08', 1, ''),
+(24, 'sfsd', 'sdfdsg', 1, '2018-08-08', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, ''),
+(25, 'xfgdgfd', 'gfdgdfh', 1, '2018-08-15', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, ''),
+(26, 'sdfsdfg', 'hfgjhgjhgk', 0, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, ''),
+(27, 'sdfsdfg', 'hfgjhgjhgk', 0, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, ''),
+(28, 'Trisna', 'Khatun', 1, '2018-08-13', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, ''),
+(29, 'zannat', 'Nayem', 1, '2018-08-16', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, '21554.2018-08-09.1533837402.jpg'),
+(30, 'Jabed', 'Ahamed', 0, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-09', 1, ''),
+(31, 'Zannatun', 'Nayem', 1, '2018-08-15', 'a@gmail.com', 'gdg', 0, '456356', '5635+4', '56456', '45645456', 'sdf', NULL, 'sfsfg', 'sfsd', 'fsg', '2018-08-10', 1, '14927.2018-08-10.1533876162.jpg'),
+(32, 'dfgfdg', 'dfgdh', 1, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-10', 1, ''),
+(33, 'dfgfdg', 'dfgdh', 1, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-10', 1, ''),
+(34, 'sdfsdt', 'dfdg', 0, '2018-08-14', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-10', 1, ''),
+(35, 'zannat', 'Nayem', 1, '2018-08-14', 'a@gmail.com', '4565', 0, 'sdfsdf', '46546', '46456', '456456', 'asdad', NULL, 'asdad', '635', 'fgfh', '2018-08-10', 1, '50900.2018-08-10.1533880920.jpg'),
+(36, 'zsdff', 'dfdfd', 1, '2018-08-15', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-10', 1, '');
 
 -- --------------------------------------------------------
 
@@ -386,9 +503,8 @@ CREATE TABLE `times` (
 --
 
 INSERT INTO `times` (`time_id`, `time`) VALUES
-(6, '07.30AM-11.30AM'),
-(7, '01.30PM-05.30PM'),
-(8, '07.30AM-11.30AM');
+(11, '07.30AM-11.30AM'),
+(12, '01.30PM-05.30PM');
 
 -- --------------------------------------------------------
 
@@ -403,10 +519,20 @@ CREATE TABLE `transactions` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
   `s_fee_id` int(10) UNSIGNED NOT NULL,
-  `paid` double(8,2) NOT NULL,
-  `remark` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `paid` float NOT NULL,
+  `remark` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`transact_id`, `transact_date`, `fee_id`, `user_id`, `student_id`, `s_fee_id`, `paid`, `remark`, `description`) VALUES
+(8, '2018-08-10 05:42:24', 14, 1, 18, 29, 100, 'USD', 'Complete'),
+(9, '2018-08-10 05:44:33', 14, 1, 34, 30, 100, 'USD', 'Complete'),
+(10, '2018-08-10 05:47:55', 14, 1, 15, 31, 100, 'USD', 'Complete'),
+(11, '2018-08-10 06:03:40', 14, 1, 36, 32, 50, 'USD', 'Complete');
 
 -- --------------------------------------------------------
 
@@ -432,7 +558,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `username`, `email`, `password`, `remember_token`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'zannat', 'zannat', 'zannat@gmail.com', '$2y$10$f0zv1rjWb7y8g8uF9lsbzuoYZTsgbR2fTa8sHg/fFgjGzImLRJVM2', 'uKRnye2X7Ytr1Eiu77TPHNlY7SVzW2nfdqnIBJ8d3yM06QgdGEExGBCJPto3', 1, '2008-01-01 18:41:00', '2008-01-01 18:41:00'),
+(1, 1, 'zannat', 'zannat', 'zannat@gmail.com', '$2y$10$f0zv1rjWb7y8g8uF9lsbzuoYZTsgbR2fTa8sHg/fFgjGzImLRJVM2', 'NE562HoGuRUqyR1SmfGFNOQj28LzMPavZKnmgXOpwotRaM3GEriopMGHT1bz', 1, '2008-01-01 18:41:00', '2008-01-01 18:41:00'),
 (2, 2, 'user', 'user', 'user@gmail.com', '$2y$10$k36.b1FniCoWBn2G0uEmG.UxchVNYIzUzPE8lTeqjuTEP1BGdOtle', 'eMcHWKVbvIqnVrdsuPh9Joktuqx1aAXfKrCJVanoRg7OAB3J2RmB16GRpXL0', 1, '2018-07-11 04:04:41', '2018-07-11 04:04:41');
 
 --
@@ -582,37 +708,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `academics`
 --
 ALTER TABLE `academics`
-  MODIFY `academic_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `academic_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `batches`
 --
 ALTER TABLE `batches`
-  MODIFY `batch_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `batch_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `class_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `class_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `fee_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `fee_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `feetypes`
 --
 ALTER TABLE `feetypes`
-  MODIFY `fee_type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `fee_type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `group_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `level_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `level_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -622,12 +748,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `programs`
 --
 ALTER TABLE `programs`
-  MODIFY `program_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `program_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `receipt_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `receipt_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -637,32 +763,32 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shifts`
 --
 ALTER TABLE `shifts`
-  MODIFY `shift_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `shift_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `status_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `status_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `studentfees`
 --
 ALTER TABLE `studentfees`
-  MODIFY `s_fee_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `s_fee_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `student_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `times`
 --
 ALTER TABLE `times`
-  MODIFY `time_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `time_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transact_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `transact_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --

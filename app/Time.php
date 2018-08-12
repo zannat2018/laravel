@@ -8,6 +8,6 @@ class Time extends Model
 {
   protected $table = 'times';
   protected $fillable=['time'];
-  protected $primarykey='time_id';
+  protected $primaryKey='time_id';
   public $timestamps=false;
 }

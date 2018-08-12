@@ -3,6 +3,7 @@ namespace App;
 use File;
 use Storage;
 class FileUpload{
+	
 	public static function photo($request,$fileName,$default=""){
 		$name="";
 		$photo=$request->photo;

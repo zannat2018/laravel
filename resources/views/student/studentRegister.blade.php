@@ -95,12 +95,12 @@ fieldset legend{
 			</div>
 			<div class="panel-body" style="padding-bottom: 4px;">
 
-				<form action="{{route('postStudentRegister')}}" method="POST" id="frm-create-student">
+				<form action="{{route('postStudentRegister')}}" method="POST" id="frm-create-student" enctype="multipart/form-data">
 					{!! csrf_field() !!}
 
 					<input type="hidden" name="class_id" id="class_id">
-					<input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}">
-                    <input type="hidden" name="dateregistered" id="dateregistered" value="{{date('Y-m-d')}}">
+					<input type="hidden" name="user_id" id="user_id" value="{{Auth::id() }}">
+                    <input type="hidden" name="dateregistered" id="dateregistered" value="{{date('Y-m-d') }}">
 
 
 
@@ -251,14 +251,14 @@ fieldset legend{
 					<table style="margin: 0 auto;">
 						<thead>
 							<tr class="info">
-								<th class="student_id">{{ sprintf('X0Sd', $student_id+1)}}</th>
+								<th class="student_id">{{ sprintf('%05d', $student_id+1)}}</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td class="photo">
 
-									{!!Html::image('photo/img.png',null,['class'=>'student-photo','id'=>'showPhoto'])!!}
+									{!!Html::image('photo/img.jpg',null,['class'=>'student-photo','id'=>'showPhoto'])!!}
 									<input type="file" name="photo" id="photo" accept="image/x-png,image/png,image/jpg,image/jpeg">
 								</td>
 							</tr>
@@ -379,6 +379,22 @@ fieldset legend{
 		$('#group_id').on('change',function(e){
 			showClassInfo();
 		})
+		//---------------------
+		$(" #frm-view-class #program_id").on('change',function(e){
+			var program_id = $(this).val();
+			var level = $('#level_id')
+			$(level).empty();
+			$.get("{{route('showLevel')}}",{program_id:program_id},function(data){
+
+				$.each(data,function(i,l){
+				$(level).append($("<option/>",{
+					value: l.level_id,
+					text: l.level
+				}))
+			  })
+				showClassInfo();
+			})
+		})
 		//-----------------------
 		$('#show-class-info').on('click',function(e){
 		e.preventDefault();
@@ -445,7 +461,7 @@ fieldset legend{
 
 </script>
 
-@stop
+@endsection
 
 
 

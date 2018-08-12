@@ -8,6 +8,6 @@ class Shift extends Model
 {
     protected $table = 'shifts';
     protected $fillable = ['shift'];
-    protected $primarykey = 'shift_id';
+    protected $primaryKey = 'shift_id';
     public $timestamps=false;
 }
